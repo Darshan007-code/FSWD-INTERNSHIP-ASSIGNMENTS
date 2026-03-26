@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Responsive Hero Page</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh;
+            padding: 60px;
+            background: linear-gradient(135deg, #1e3a8a, #06b6d4);
+            color: white;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text span {
+            color: #facc15;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #facc15;
+            color: black;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .hero img {
+            width: 320px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            .hero img {
+                margin-top: 20px;
+                width: 220px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <section class="hero">
+
+        <div class="hero-text">
+            <h1>Hello, I'm <span>Darshan Patil</span></h1>
+
+            <p>I am a student learning web development and building modern, attractive websites.</p>
+
+            <div class="card">
+                <h3>Hobbies</h3>
+                <p>Watching Movies, Playing Cricket</p>
+            </div>
+
+            <div class="card">
+                <h3>Skills</h3>
+                <p>HTML Basics, Computer Knowledge, Communication</p>
+            </div>
+
+            <div class="buttons">
+                <a href="https://www.netflix.com" target="_blank" class="btn btn-primary">Visit Netflix</a>
+                <a href="#" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+
+        <img src="E:/Photo_dars.jpg" alt="My Photo">
+
+    </section>
+
+</body>
+</html>

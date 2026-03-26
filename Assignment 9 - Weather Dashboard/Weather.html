@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a, #06b6d4);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input {
+            padding: 10px;
+            width: 65%;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #facc15;
+            cursor: pointer;
+        }
+
+        .loading {
+            color: yellow;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .weather {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h1>Weather Dashboard</h1>
+
+    <div class="box">
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Weather</button>
+
+        <div id="status"></div>
+        <div id="result" class="weather"></div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            let city = document.getElementById("city").value;
+            let status = document.getElementById("status");
+            let result = document.getElementById("result");
+
+            result.innerHTML = "";
+            status.innerHTML = "Loading...";
+            status.className = "loading";
+
+            try {
+                let geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+                let geoData = await geoRes.json();
+
+                if (!geoData.results) {
+                    throw "City not found";
+                }
+
+                let lat = geoData.results[0].latitude;
+                let lon = geoData.results[0].longitude;
+
+                let weatherRes = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+                );
+
+                let weatherData = await weatherRes.json();
+
+                let temp = weatherData.current_weather.temperature;
+                let wind = weatherData.current_weather.windspeed;
+
+                status.innerHTML = "";
+                result.innerHTML = `
+                    <p><b>City:</b> ${city}</p>
+                    <p><b>Temperature:</b> ${temp}°C</p>
+                    <p><b>Wind Speed:</b> ${wind} km/h</p>
+                `;
+
+            } catch (error) {
+                status.innerHTML = "Error: " + error;
+                status.className = "error";
+            }
+        }
+    </script>
+
+</body>
+</html>
